@@ -10,6 +10,8 @@ import { ProductService } from '../services/api/products/product.service';
 })
 export class HomeComponent implements OnInit {
 
+  loader= true;
+
   products: ProductRepresentation[] = [];
 
   constructor(
@@ -17,6 +19,10 @@ export class HomeComponent implements OnInit {
   ){}
 
   ngOnInit(): void {
+
+    setTimeout(()=>{                           
+      this.loader = false;
+  }, 1000);
     
     this.service.getAllProductsWithLimit()
     .subscribe({
@@ -26,8 +32,8 @@ export class HomeComponent implements OnInit {
         error: (error: HttpErrorResponse) => {
           console.log(error)
         }
-        
     })
+
   }
 
 }
